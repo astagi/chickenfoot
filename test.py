@@ -1,5 +1,5 @@
 from chickenfoot import Chickenfoot
-from controller import Controller
+from chickenfoot import Controller
 
 cf = Chickenfoot()
 contr = Controller()
