@@ -1,13 +1,10 @@
-import socket
 from binder import Binder
 from commandparser import CommandParser
-TCP_IP = '127.0.0.1'
-TCP_PORT = 5005
-BUFFER_SIZE = 20
 
 class Chickenfoot:
 
-    def __init__(self):
+    def __init__(self, comm):
+        self.communicator = comm
         self.binder = Binder()
         self.binder.bind('rl', self.left)
         self.binder.bind('rr', self.right)
@@ -28,17 +25,11 @@ class Chickenfoot:
         print data
 
     def listen(self):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind((TCP_IP, TCP_PORT))
-        s.listen(1)
-
-        conn, addr = s.accept()
-        print 'Connection address:', addr
+        self.communicator.listen()
         while 1:
-            data = conn.recv(BUFFER_SIZE)
+            data = self.communicator.receive()
             if data:
-                print "received data:", data
                 (action, namevalue) = self.cparser.parse(data)
                 self.binder.execute(action, **namevalue)
-        conn.close()
+        self.communicator.close()
 
