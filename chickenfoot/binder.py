@@ -1,4 +1,4 @@
-class Controller:
+class Binder:
 
     def __init__(self):
         self.binders = {}

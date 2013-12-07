@@ -1,15 +1,27 @@
-from chickenfoot import Chickenfoot
-from chickenfoot import Controller
+#!/usr/bin/env python
 
-cf = Chickenfoot()
-contr = Controller()
+import socket
 
-contr.bind('rl', cf.left)
-contr.bind('rr', cf.right)
-contr.bind('fw', cf.fw)
-contr.bind('rw', cf.rw)
 
-contr.execute('rl')
-contr.execute('rr')
-contr.execute('fw')
-contr.execute('rw')
+TCP_IP = '127.0.0.1'
+TCP_PORT = 5005
+
+class Client():
+
+    def __init__(self):
+        self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.s.connect((TCP_IP, TCP_PORT))
+
+    def left(self):
+        self.s.send("rl?p1n:p1-p2n:p2")
+
+    def right(self):
+        self.s.send("rr?p1n:p1-p2n:p2")
+
+    def shutdown(self):
+        self.s.close()
+
+client = Client()
+client.left()
+client.shutdown()
+
