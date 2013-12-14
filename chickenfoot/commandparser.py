@@ -4,6 +4,7 @@ class CommandParser:
         pass
 
     def parse(self, data):
+        (module, data) = data.split('=')
         params = data.split('?')
         action = params[0]
         namevalue = {}
@@ -12,4 +13,4 @@ class CommandParser:
             for couple in couples:
                 (name, value) = couple.split(":")
                 namevalue[name] = value
-        return (action, namevalue)
+        return (module, action, namevalue)
