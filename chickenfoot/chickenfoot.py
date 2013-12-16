@@ -1,7 +1,7 @@
 from binder import Binder
 from commandparser import CommandParser
-from module_register import get_module
-from communicator_register import get_communicator
+from modules_register import get_module
+from communications_register import get_communication
 import json
 
 class Chickenfoot:
@@ -14,13 +14,13 @@ class Chickenfoot:
     def init_from_file(self, filename):
         json_file_content = open(filename, 'r').read()
         params = json.loads(json_file_content)
-        self.set_communicator(params['communication']['type'], **params['communication']['parameters'])
+        self.set_communication(params['communication']['type'], **params['communication']['parameters'])
         for module in params['modules']:
             self.add_module(module['name'], module['type'], **module['parameters'])
 
 
-    def set_communicator(self, comm_name, **data):
-        self.communicator = get_communicator(comm_name, **data)
+    def set_communication(self, comm_name, **data):
+        self.communicator = get_communication(comm_name, **data)
 
     def add_module(self, id, module_name, **data):
         self.modules[id] = get_module(module_name, **data)

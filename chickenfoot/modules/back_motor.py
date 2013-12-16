@@ -1,6 +1,6 @@
-from module import Module
+from chickenfoot.module import Module
 
-class Pmotor(Module):
+class BackMotor(Module):
 
     def __init__(self, **params):
         Module.__init__(self, **params)
