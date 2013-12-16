@@ -1,0 +1,25 @@
+{
+    "communication" : {
+        "type" : "tcp",
+        "parameters" : {  
+            "ip" : "127.0.0.1",
+            "port": 5005
+        }
+    },
+    "modules" : [
+        {
+            "name":"M1",
+            "type":"Amotor",
+            "parameters" : { 
+                "pin": 4
+            }
+        },
+        {
+            "name":"M2",
+            "type":"Pmotor",
+            "parameters" : { 
+                "pin": 4
+            }
+        }
+    ]
+}

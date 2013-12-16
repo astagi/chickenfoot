@@ -15,10 +15,6 @@ class TcpCommunicator(Communicator):
             self.port = config['port']
         else:
             self.port = TCP_PORT
-        if 'buffersize' in config:
-            self.buffersize = config['buffersize']
-        else:
-            self.buffersize = BUFFER_SIZE
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def listen(self):
@@ -28,7 +24,7 @@ class TcpCommunicator(Communicator):
         print 'Connection address:', addr
 
     def receive(self):
-        data = self.conn.recv(self.buffersize)
+        data = self.conn.recv(BUFFER_SIZE)
         if data:
             print "received data:", data
             return data
