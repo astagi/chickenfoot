@@ -2,7 +2,7 @@ from chickenfoot.communication import Communication
 import socket
 TCP_IP = '127.0.0.1'
 TCP_PORT = 5005
-BUFFER_SIZE = 19
+BUFFER_SIZE = 1
 
 class TcpCommunication(Communication):
 
@@ -24,7 +24,12 @@ class TcpCommunication(Communication):
         print 'Connection address:', addr
 
     def receive(self):
-        data = self.conn.recv(BUFFER_SIZE)
+        c = ''
+        data = ""
+        while c != '\0':    
+            c = self.conn.recv(BUFFER_SIZE)
+            data = data + c
+        data = data[:-1]
         if data:
             print "received data:", data
             return data

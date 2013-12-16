@@ -12,16 +12,54 @@ class Client():
         self.s.connect((TCP_IP, TCP_PORT))
 
     def left(self):
-        self.s.send("M1=rl?p1n:p1-p2n:p2")
+        bundle = """
+        {
+            "module" : "M1",
+            "action" : "rl",
+            "parameters" : {  
+                "p1name" : "p1",
+                "p2name": 5
+            }
+        }
+        """
+        self.__send(bundle)
 
     def right(self):
-        self.s.send("M1=rr?p1n:p1-p2n:p2")
+        bundle = """
+        {
+            "module" : "M1",
+            "action" : "rr",
+            "parameters" : {  
+                "p1name" : "p1"
+            }
+        }
+        """
+        self.__send(bundle)
 
     def up(self):
-        self.s.send("M2=fw?p1n:p1-p2n:p2")
+        bundle = """
+        {
+            "module" : "M2",
+            "action" : "fw",
+            "parameters" : {  
+                "p1name" : "p1",
+                "p2name" : "p2"
+            }
+        }
+        """
+        self.__send(bundle)
 
     def down(self):
-        self.s.send("M2=rw?p1n:p1-p2n:p2")
+        bundle = """
+        {
+            "module" : "M2",
+            "action" : "rw"
+        }
+        """
+        self.__send(bundle)
+
+    def __send(self, data):
+        self.s.send(data + "\0")
 
     def shutdown(self):
         self.s.close()

@@ -18,7 +18,6 @@ class Chickenfoot:
         for module in params['modules']:
             self.add_module(module['name'], module['type'], **module['parameters'])
 
-
     def set_communication(self, comm_name, **data):
         self.communicator = get_communication(comm_name, **data)
 
@@ -30,7 +29,10 @@ class Chickenfoot:
         while 1:
             data = self.communicator.receive()
             if data:
-                (module, action, namevalue) = self.cparser.parse(data)
-                self.modules[module].execute(action, **namevalue)
+                (module, action, parameters) = self.cparser.parse(data)
+                if parameters:
+                    self.modules[module].execute(action, **parameters)
+                else:
+                    self.modules[module].execute(action)
         self.communicator.close()
 
