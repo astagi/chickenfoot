@@ -7,10 +7,10 @@ class CommandParser:
 
     def parse(self, data):
         data = json.loads(data)
-        module = data['module']
-        action = data['action']
-        if 'parameters' in data:
-            parameters = data['parameters']
+        module = data['m']
+        action = data['a']
+        if 'p' in data:
+            parameters = data['p']
         else:
             parameters = None
         return (module, action, parameters)

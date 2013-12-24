@@ -14,9 +14,9 @@ class Client():
     def left(self):
         bundle = """
         {
-            "module" : "M1",
-            "action" : "rl",
-            "parameters" : {  
+            "m" : "M1",
+            "a" : "rl",
+            "p" : {  
                 "p1name" : "p1",
                 "p2name": 5
             }
@@ -27,9 +27,9 @@ class Client():
     def right(self):
         bundle = """
         {
-            "module" : "M1",
-            "action" : "rr",
-            "parameters" : {  
+            "m" : "M1",
+            "a" : "rr",
+            "p" : {  
                 "p1name" : "p1"
             }
         }
@@ -39,9 +39,9 @@ class Client():
     def up(self):
         bundle = """
         {
-            "module" : "M2",
-            "action" : "fw",
-            "parameters" : {  
+            "m" : "M2",
+            "a" : "fw",
+            "p" : {  
                 "p1name" : "p1",
                 "p2name" : "p2"
             }
@@ -52,8 +52,32 @@ class Client():
     def down(self):
         bundle = """
         {
-            "module" : "M2",
-            "action" : "rw"
+            "m" : "M2",
+            "a" : "rw"
+        }
+        """
+        self.__send(bundle)
+
+    def stop(self):
+        bundle = """
+        {
+            "m" : "M1",
+            "a" : "stop",
+            "p" : {  
+                "p1name" : "stop"
+            }
+        }
+        """
+        self.__send(bundle)
+
+    def stop_wheel(self):
+        bundle = """
+        {
+            "m" : "M2",
+            "a" : "stop",
+            "p" : {  
+                "p1name" : "stop_wheel"
+            }
         }
         """
         self.__send(bundle)
@@ -67,7 +91,9 @@ class Client():
 client = Client()
 client.left()
 client.right()
+client.stop_wheel()
 client.up()
 client.down()
+client.stop()
 client.shutdown()
 
