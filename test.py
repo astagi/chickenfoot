@@ -1,15 +1,24 @@
-#!/usr/bin/env python
 from chickenfoot import Chickenfoot
 import socket
 
-TCP_IP = '127.0.0.1'
-TCP_PORT = 5005
+class TestChickenfootClient():
 
-class Client():
-
-    def __init__(self):
+    def setUp(self):
+        TCP_IP = '127.0.0.1'
+        TCP_PORT = 5005
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((TCP_IP, TCP_PORT))
+
+    def tearDown(self):
+        self.s.close()
+
+    def test_moves(self):
+        self.left()
+        self.right()
+        self.stop_wheel()
+        self.up()
+        self.down()
+        self.stop()
 
     def left(self):
         bundle = """
@@ -22,7 +31,7 @@ class Client():
             }
         }
         """
-        self.__send(bundle)
+        assert self.__send(bundle)
 
     def right(self):
         bundle = """
@@ -34,7 +43,7 @@ class Client():
             }
         }
         """
-        self.__send(bundle)
+        assert self.__send(bundle)
 
     def up(self):
         bundle = """
@@ -47,7 +56,7 @@ class Client():
             }
         }
         """
-        self.__send(bundle)
+        assert self.__send(bundle)
 
     def down(self):
         bundle = """
@@ -56,7 +65,7 @@ class Client():
             "a" : "rw"
         }
         """
-        self.__send(bundle)
+        assert self.__send(bundle)
 
     def stop(self):
         bundle = """
@@ -68,7 +77,7 @@ class Client():
             }
         }
         """
-        self.__send(bundle)
+        assert self.__send(bundle)
 
     def stop_wheel(self):
         bundle = """
@@ -80,20 +89,9 @@ class Client():
             }
         }
         """
-        self.__send(bundle)
+        assert self.__send(bundle)
 
     def __send(self, data):
-        self.s.send(data + "\0")
-
-    def shutdown(self):
-        self.s.close()
-
-client = Client()
-client.left()
-client.right()
-client.stop_wheel()
-client.up()
-client.down()
-client.stop()
-client.shutdown()
-
+        byte_to_send = len(data) + 1
+        byte_sent = self.s.send(data + "\0")
+        return byte_sent == byte_to_send
