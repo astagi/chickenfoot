@@ -1,6 +1,7 @@
 {
     "communication" : {
         "type" : "tcp",
+        "nanpy_dev" : "/dev/tty.usbmodem1411",
         "parameters" : {  
             "ip" : "127.0.0.1",
             "port": 5005
