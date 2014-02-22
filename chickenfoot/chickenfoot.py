@@ -3,6 +3,8 @@ from commandparser import CommandParser
 from modules_register import get_module
 from communications_register import get_communication
 import json
+from nanpy import serial_manager
+from nanpy import Arduino
 
 class Chickenfoot:
 
@@ -10,6 +12,7 @@ class Chickenfoot:
         self.modules = {}
         self.communicator = None
         self.cparser = CommandParser()
+        serial_manager.connect('/dev/tty.usbmodem1411')
 
     def init_from_file(self, filename):
         json_file_content = open(filename, 'r').read()

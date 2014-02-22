@@ -11,14 +11,18 @@
             "name":"M1",
             "type":"FrontMotor",
             "parameters" : { 
-                "pin": 4
+                "cp1": 4,
+                "cp2": 5,
+                "ep" : 10
             }
         },
         {
             "name":"M2",
             "type":"BackMotor",
             "parameters" : { 
-                "pin": 5
+                "cp1": 2,
+                "cp2": 3,
+                "ep" : 9
             }
         }
     ]
