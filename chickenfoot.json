@@ -2,8 +2,8 @@
     "communication" : {
         "type" : "tcp",
         "nanpy_dev" : "/dev/tty.usbmodem1411",
-        "parameters" : {  
-            "ip" : "127.0.0.1",
+        "parameters" : {
+            "ip" : "0.0.0.0",
             "port": 5005
         }
     },
@@ -11,7 +11,7 @@
         {
             "name":"M1",
             "type":"FrontMotor",
-            "parameters" : { 
+            "parameters" : {
                 "cp1": 4,
                 "cp2": 5,
                 "ep" : 10
@@ -20,7 +20,7 @@
         {
             "name":"M2",
             "type":"BackMotor",
-            "parameters" : { 
+            "parameters" : {
                 "cp1": 2,
                 "cp2": 3,
                 "ep" : 9

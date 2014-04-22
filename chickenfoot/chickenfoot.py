@@ -17,7 +17,7 @@ class Chickenfoot:
         json_file_content = open(filename, 'r').read()
         params = json.loads(json_file_content)
         if 'nanpy_dev' in params['communication']:
-            serial_manager.connect(params['communication']['nanpy_dev'])
+            serial_manager.open(params['communication']['nanpy_dev'])
         self.set_communication(params['communication']['type'], **params['communication']['parameters'])
         for module in params['modules']:
             self.add_module(module['name'], module['type'], **module['parameters'])
