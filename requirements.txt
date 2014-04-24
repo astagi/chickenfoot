@@ -1,3 +1,4 @@
+nanpy==0.9
 nose==1.3.0
+pyserial==2.7
 wsgiref==0.1.2
-nanpy==0.8
