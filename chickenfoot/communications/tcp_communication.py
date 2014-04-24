@@ -18,6 +18,7 @@ class TcpCommunication(Communication):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     def listen(self):
+        self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.s.bind((self.ip, self.port))
         self.s.listen(1)
         self.conn, addr = self.s.accept()
@@ -26,7 +27,7 @@ class TcpCommunication(Communication):
     def receive(self):
         c = ''
         data = ""
-        while c != '\0':    
+        while c != '\0':
             c = self.conn.recv(BUFFER_SIZE)
             data = data + c
         data = data[:-1]
