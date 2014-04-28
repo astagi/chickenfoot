@@ -24,10 +24,14 @@ class TcpCommunication(Communication):
         self.conn, addr = self.s.accept()
         print 'Connection address:', addr
 
+    def send(self, data):
+        self.conn.send(data + '\n')
+
     def receive(self):
         c = ''
         data = ""
-        while c != '\0':
+
+        while c != '\n':
             c = self.conn.recv(BUFFER_SIZE)
             data = data + c
         data = data[:-1]
