@@ -4,7 +4,7 @@ import socket
 class TestChickenfootClient():
 
     def setUp(self):
-        TCP_IP = '127.0.0.1'
+        TCP_IP = '192.168.0.6'
         TCP_PORT = 5005
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.connect((TCP_IP, TCP_PORT))
@@ -25,7 +25,7 @@ class TestChickenfootClient():
         {
             "m" : "M1",
             "a" : "rl",
-            "p" : {  
+            "p" : {
                 "p1name" : "p1",
                 "p2name": 5
             }
@@ -38,7 +38,7 @@ class TestChickenfootClient():
         {
             "m" : "M1",
             "a" : "rr",
-            "p" : {  
+            "p" : {
                 "p1name" : "p1"
             }
         }
@@ -50,7 +50,7 @@ class TestChickenfootClient():
         {
             "m" : "M2",
             "a" : "fw",
-            "p" : {  
+            "p" : {
                 "p1name" : "p1",
                 "p2name" : "p2"
             }
@@ -72,7 +72,7 @@ class TestChickenfootClient():
         {
             "m" : "M1",
             "a" : "stop",
-            "p" : {  
+            "p" : {
                 "p1name" : "stop"
             }
         }
@@ -84,7 +84,7 @@ class TestChickenfootClient():
         {
             "m" : "M2",
             "a" : "stop",
-            "p" : {  
+            "p" : {
                 "p1name" : "stop_wheel"
             }
         }
@@ -93,5 +93,5 @@ class TestChickenfootClient():
 
     def __send(self, data):
         byte_to_send = len(data) + 1
-        byte_sent = self.s.send(data + "\0")
+        byte_sent = self.s.send(data + "\n")
         return byte_sent == byte_to_send

@@ -1,5 +1,6 @@
 from modules.front_motor import FrontMotor
 from modules.back_motor import BackMotor
+from services.temperature_sensor import TemperatureSensor
 
 modules = {}
 
@@ -11,3 +12,4 @@ def register_module(module_name, cls):
 
 register_module('FrontMotor', FrontMotor)
 register_module('BackMotor', BackMotor)
+register_module('TemperatureSensor', TemperatureSensor)

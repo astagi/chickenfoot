@@ -1,7 +1,9 @@
 {
+    "arduino" : {
+        "nanpy_dev" : "/dev/tty.usbmodem1411"
+    },
     "communication" : {
         "type" : "tcp",
-        "nanpy_dev" : "/dev/tty.usbmodem1411",
         "parameters" : {
             "ip" : "0.0.0.0",
             "port": 5005
@@ -26,5 +28,19 @@
                 "ep" : 9
             }
         }
-    ]
+    ],
+    "services" : {
+        "TemperatureSensor" : {
+            "communication" : {
+                "type" : "tcp",
+                "parameters" : {
+                    "ip" : "0.0.0.0",
+                    "port": 5006
+                }
+            },
+            "parameters" : {
+                "tp1": 7
+            }
+        }
+    }
 }
